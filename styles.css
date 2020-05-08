@@ -1,0 +1,61 @@
+:root {
+  font-size: 20px;
+}
+
+body {
+  margin: 0;
+  text-align: center;
+  font-family: 'Jost', sans-serif;
+  background-color: #1f4068;
+}
+
+/* Title */
+.title_container {
+  margin: 0;
+  height: 25vh;
+  color: #1b1b2f;
+}
+
+.title_container h1 {
+  margin: 0;
+  padding-top: 1rem;
+}
+
+.title_container h2 {
+  font-weight: lighter;
+  font-size: 1rem;
+}
+
+
+/* Clock */
+.clock_container {
+  margin: 0;
+  height: 50vh;
+  color: #e43f5a;
+}
+
+.weekday {
+  padding-top: 3rem;
+  margin: 0;
+}
+
+.clock {
+  padding: 0;
+  font-size: 4rem;
+  margin: 0;
+}
+
+/* footer */
+footer {
+  height: 25vh;
+  color: #1b1b2f;
+  margin: 0;
+}
+
+footer h1 {
+  font-size: 1rem;
+  font-weight: lighter;
+  margin: 0;
+  padding-top: 5rem;
+  opacity: 70%;
+}
