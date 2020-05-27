@@ -1,12 +1,8 @@
 //clock implementation
 
-//define all the necessary variables to store acutal dates
+//define all the necessary variables and a second constant
 let actualDate, hours, minutes, seconds, weekday
-
-//define a constant for the miliseconds into one second
 const second = 1000
-
-//define a list of the week days from the first day (access by [0]) to the last day (access by [6])
 const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
 //get clock structure on html
@@ -20,36 +16,45 @@ function updateClock() {
   actualDate = new Date()
 
   //for  weekday updates
-  // store the actual week day, getting the list item from position of the actual day
-  //cause the function getDay returns the number of the week day (0 to 6), so the list is in the corresponding order
-  //and we can use it like the index of the list
   weekday = daysOfWeek[actualDate.getDay()]
-  
-  //if the text into the html structure day is different than the current day of the week
   if (day.innerHTML != weekday) {
     day.innerHTML = weekday
   }
   
 
   //split in hour, minute and second
-  //and if it is not greater or equal to ten it wont have the left zero (like 1, 2, 3 and we want 01, 02, 03)
-  //so put a zero at the left
+  //and if it is not greater or equal to ten it wont have the left zero (like 1, 2, 3 and we want 01, 02, 03), so put a zero at the left
 
   hours = actualDate.getHours()
+
+  //verify hour to change the theme
+  if (hours >= 0 & hours <= 4) {
+    latenight()
+  }
+  else if (hours >= 5 & hours <= 11) {
+    morning()
+  }
+  else if (hours >= 12 & hours <= 18) {
+    evening()
+  }
+  else {
+    night()
+  }
+
   if (hours < 10) {
     hours = "0" + hours
   }
-
+  
   minutes = actualDate.getMinutes()
   if (minutes < 10) {
     minutes = "0" + minutes
   }
-
+  
   seconds = actualDate.getSeconds()
   if (seconds < 10) {
     seconds = "0" + seconds
   }
-
+  
   //format clock time
   time = hours + ":" + minutes + ":" + seconds
 
@@ -57,8 +62,43 @@ function updateClock() {
   clock.innerHTML = time
 }
 
-//remove the 1 second delay of first update (when the page loads)
+var body = document.getElementById("body");
+var header = document.querySelector(".title_container");
+var footer = document.querySelector(".footer");
+var clockContainer = document.querySelector(".clock_container")
+
+function latenight () {
+  body.style.backgroundColor = "#120136";
+  header.style.color = "#ffffff";
+  footer.style.color = "#ffffff";
+  clockContainer.style.color = "#40bad5";
+}
+
+function morning() {
+  body.style.backgroundColor = "#95F0EE";
+  header.style.color = "#BFBFBF";
+  footer.style.color = "#BFBFBF";
+  clockContainer.style.color = "#eca0b6";
+}
+
+function evening() {
+  body.style.backgroundColor = "#511845";
+  header.style.color = "#ff5733";
+  footer.style.color = "#ff5733";
+  clockContainer.style.color = "#c70039";
+}
+
+function night() {
+  body.style.backgroundColor = "#1f4068";
+  header.style.color = "#ffffff";
+  footer.style.color = "#ffffff";
+  clockContainer.style.color = "#e43f5a";
+}
+
+//remove 1 second delay to first update of clock
 updateClock()
 
 //infinite loop that executes the updateClock function every second(declarated as a const at the top)
 setInterval(updateClock, second)
+
+
