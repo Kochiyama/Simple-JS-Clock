@@ -1,6 +1,8 @@
 # Simple-JS-Clock
 A beautiful JS clock with HTML and CSS for design and structure purposes.
 
+# see it online: https://kochiyama.github.io/Simple-JS-Clock/
+
 # Here is the visual of the clock:
 ![preview image](https://github.com/Kochiyama/Simple-JS-Clock/blob/master/preview.png)
 
