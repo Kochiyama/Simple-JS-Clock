@@ -60,7 +60,7 @@ function updateClock() {
 
   //update the clock time
   clock.innerHTML = time
-}
+} 
 
 var body = document.getElementById("body");
 var header = document.querySelector(".title_container");
