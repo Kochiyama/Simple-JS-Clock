@@ -21,7 +21,6 @@ function updateClock() {
     day.innerHTML = weekday
   }
   
-
   //split in hour, minute and second
   //and if it is not greater or equal to ten it wont have the left zero (like 1, 2, 3 and we want 01, 02, 03), so put a zero at the left
 
