@@ -1,40 +1,45 @@
-function setLatenightTheme(page) {
-	page.body.style.backgroundColor = '#120136';
-	page.header.style.color = '#ffffff';
-	page.footer.style.color = '#ffffff';
-	page.clockContainer.style.color = '#40bad5';
-}
+const themes = {
+	latenight: {
+		backgroundColor: '#120136',
+		textColor: '#ffffff',
+		clockColor: '#40bad5',
+	},
 
-function setMorningTheme(page) {
-	page.body.style.backgroundColor = '#95F0EE';
-	page.header.style.color = '#BFBFBF';
-	page.footer.style.color = '#BFBFBF';
-	page.clockContainer.style.color = '#eca0b6';
-}
+	morning: {
+		backgroundColor: '#95F0EE',
+		textColor: '#BFBFBF',
+		clockColor: '#eca0b6',
+	},
 
-function setEveningTheme(page) {
-	page.body.style.backgroundColor = '#511845';
-	page.header.style.color = '#ff5733';
-	page.footer.style.color = '#ff5733';
-	page.clockContainer.style.color = '#c70039';
-}
+	evening: {
+		backgroundColor: '#511845',
+		textColor: '#ff5733',
+		clockColor: '#c70039',
+	},
 
-function setNightTheme(page) {
-	body.style.backgroundColor = '#1f4068';
-	page.header.style.color = '#ffffff';
-	page.footer.style.color = '#ffffff';
-	page.clockContainer.style.color = '#e43f5a';
+	night: {
+		backgroundColor: '#1f4068',
+		textColor: '#ffffff',
+		clockColor: '#e43f5a',
+	},
+};
+
+function setTheme(page, theme) {
+	page.body.style.backgroundColor = theme.backgroundColor;
+	page.header.style.color = theme.textColor;
+	page.footer.style.color = theme.textColor;
+	page.clockContainer.style.color = theme.clockColor;
 }
 
 export default function setThemeBasedOnDayHours(hour, page) {
 	//verify hour to change the theme
 	if (hour >= 0 && hour <= 4) {
-		setLatenightTheme(page);
+		setTheme(page, themes.latenight);
 	} else if (hour <= 11) {
-		setMorningTheme(page);
+		setTheme(page, themes.morning);
 	} else if (hour <= 18) {
-		setEveningTheme(page);
+		setTheme(page, themes.evening);
 	} else {
-		setNightTheme(page);
+		setTheme(page, themes.night);
 	}
 }
