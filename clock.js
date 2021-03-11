@@ -1,103 +1,88 @@
-//clock implementation
-
 //define all the necessary variables and a second constant
-let actualDate, hours, minutes, seconds, weekday
-const second = 1000
-const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+const interval = 1000; // 1000ms
+const clock = document.querySelector('.clock');
+const day = document.querySelector('.weekday');
+const body = document.getElementById('body');
+const header = document.querySelector('.title_container');
+const footer = document.querySelector('.footer');
+const clockContainer = document.querySelector('.clock_container');
 
-//get clock structure on html
-const clock = document.querySelector(".clock")
+function convertWeekdayNumberToName(weekdayNumber) {
+	const weekdayDictionary = [
+		'Sunday',
+		'Monday',
+		'Tuesday',
+		'Wednesday',
+		'Thursday',
+		'Friday',
+		'Saturday',
+	];
 
-//get weekday structure on html
-const day = document.querySelector(".weekday")
+	return weekdayDictionary[weekdayNumber];
+}
+
+function setThemeBasedOnDayHours(hour) {
+	//verify hour to change the theme
+	if (hour >= 0 && hour <= 4) {
+		setLatenightTheme();
+	} else if (hour <= 11) {
+		setMorningTheme();
+	} else if (hour <= 18) {
+		setEveningTheme();
+	} else {
+		setNightTheme();
+	}
+}
 
 //get the current time  and update the html clock
 function updateClock() {
-  actualDate = new Date()
+	const actualDate = new Date();
 
-  //for  weekday updates
-  weekday = daysOfWeek[actualDate.getDay()]
-  if (day.innerHTML != weekday) {
-    day.innerHTML = weekday
-  }
-  
-  //split in hour, minute and second
-  //and if it is not greater or equal to ten it wont have the left zero (like 1, 2, 3 and we want 01, 02, 03), so put a zero at the left
+	const weekday = convertWeekdayNumberToName(actualDate.getDay());
 
-  hours = actualDate.getHours()
+	// update if isn't the same
+	if (day.innerHTML != weekday) {
+		day.innerHTML = weekday;
+	}
 
-  //verify hour to change the theme
-  if (hours >= 0 & hours <= 4) {
-    latenight()
-  }
-  else if (hours >= 5 & hours <= 11) {
-    morning()
-  }
-  else if (hours >= 12 & hours <= 18) {
-    evening()
-  }
-  else {
-    night()
-  }
+	setThemeBasedOnDayHours(actualDate.getHours());
 
-  if (hours < 10) {
-    hours = "0" + hours
-  }
-  
-  minutes = actualDate.getMinutes()
-  if (minutes < 10) {
-    minutes = "0" + minutes
-  }
-  
-  seconds = actualDate.getSeconds()
-  if (seconds < 10) {
-    seconds = "0" + seconds
-  }
-  
-  //format clock time
-  time = hours + ":" + minutes + ":" + seconds
+	const timeString = actualDate.toTimeString().slice(0, 8);
 
-  //update the clock time
-  clock.innerHTML = time
-} 
-
-var body = document.getElementById("body");
-var header = document.querySelector(".title_container");
-var footer = document.querySelector(".footer");
-var clockContainer = document.querySelector(".clock_container")
-
-function latenight () {
-  body.style.backgroundColor = "#120136";
-  header.style.color = "#ffffff";
-  footer.style.color = "#ffffff";
-  clockContainer.style.color = "#40bad5";
+	//update the clock time
+	clock.innerHTML = timeString;
 }
 
-function morning() {
-  body.style.backgroundColor = "#95F0EE";
-  header.style.color = "#BFBFBF";
-  footer.style.color = "#BFBFBF";
-  clockContainer.style.color = "#eca0b6";
+function setLatenightTheme() {
+	body.style.backgroundColor = '#120136';
+	header.style.color = '#ffffff';
+	footer.style.color = '#ffffff';
+	clockContainer.style.color = '#40bad5';
 }
 
-function evening() {
-  body.style.backgroundColor = "#511845";
-  header.style.color = "#ff5733";
-  footer.style.color = "#ff5733";
-  clockContainer.style.color = "#c70039";
+function setMorningTheme() {
+	body.style.backgroundColor = '#95F0EE';
+	header.style.color = '#BFBFBF';
+	footer.style.color = '#BFBFBF';
+	clockContainer.style.color = '#eca0b6';
 }
 
-function night() {
-  body.style.backgroundColor = "#1f4068";
-  header.style.color = "#ffffff";
-  footer.style.color = "#ffffff";
-  clockContainer.style.color = "#e43f5a";
+function setEveningTheme() {
+	body.style.backgroundColor = '#511845';
+	header.style.color = '#ff5733';
+	footer.style.color = '#ff5733';
+	clockContainer.style.color = '#c70039';
+}
+
+function setNightTheme() {
+	body.style.backgroundColor = '#1f4068';
+	header.style.color = '#ffffff';
+	footer.style.color = '#ffffff';
+	clockContainer.style.color = '#e43f5a';
 }
 
 //remove 1 second delay to first update of clock
-updateClock()
+updateClock();
 
 //infinite loop that executes the updateClock function every second(declarated as a const at the top)
-setInterval(updateClock, second)
-
-
+setInterval(updateClock, interval);
