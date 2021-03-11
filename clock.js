@@ -1,5 +1,5 @@
 import setThemeBasedOnDayHours from './controllers/ThemeController.js';
-import convertWeekdayNumberToName from './controllers/WeekdayController';
+import convertWeekdayNumberToName from './controllers/WeekdayController.js';
 
 // Create an object page, with all the html elements that we manipulate
 const page = {
